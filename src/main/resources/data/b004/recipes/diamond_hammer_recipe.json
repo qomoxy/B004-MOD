@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "group": "b004_hammers",
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "I": {
+      "item": "b004:golden_hammer"
+    }
+  },
+  "result": {
+    "item": "b004:diamond_hammer",
+    "count": 1
+  }
+}

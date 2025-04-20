@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "group": "b004_hammers",
+  "pattern": [
+    "###",
+    "#I#",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "I": {
+      "item": "b004:diamond_hammer"
+    },
+    "S": {
+      "item": "minecraft:netherite_upgrade_smithing_template"
+    }
+  },
+  "result": {
+    "item": "b004:netherite_hammer",
+    "count": 1
+  }
+}

@@ -1,6 +1,7 @@
 package xyz.sncf.b004.item;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EquipmentSlot; // Pour EquipmentSlot
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -35,28 +36,52 @@ public class HammerItem extends PickaxeItem {
     }
 
     private void breakBlocksInRadius(Level level, @NotNull BlockPos origin, LivingEntity miner, ItemStack tool, int radius) {
-        AABB area = new AABB(
-                origin.offset(-radius, -radius, -radius),
-                origin.offset(radius, radius, radius)
-        );
+        if (!(miner instanceof Player player)) return;
 
-        BlockPos.betweenClosedStream((int) area.minX, (int) area.minY, (int) area.minZ,
-                        (int) area.maxX, (int) area.maxY, (int) area.maxZ)
-                .forEach(blockPos -> {
-                    BlockState state = level.getBlockState(blockPos);
+        // Détermine l'axe d'extension en fonction du regard du joueur
+        float pitch = player.getXRot();
+        boolean isVerticalMining = Math.abs(pitch) > 45; // Seuil ajustable
 
-                    if (isCorrectToolForDrops(tool, state) && miner instanceof Player player) {
+        int minX = origin.getX() - radius;
+        int maxX = origin.getX() + radius;
+        int minY = origin.getY();
+        int maxY = origin.getY();
+        int minZ = origin.getZ() - radius;
+        int maxZ = origin.getZ() + radius;
 
+        if (!isVerticalMining) {
+            // Extension verticale sur l'axe Y
+            minY = origin.getY() - radius;
+            maxY = origin.getY() + radius;
+
+            // Restriction sur X ou Z selon la direction horizontale
+            Direction direction = player.getDirection();
+            if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+                minZ = origin.getZ();
+                maxZ = origin.getZ();
+            } else {
+                minX = origin.getX();
+                maxX = origin.getX();
+            }
+        }
+
+        // Destruction des blocs
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    BlockPos targetPos = new BlockPos(x, y, z);
+                    BlockState state = level.getBlockState(targetPos);
+
+                    if (isCorrectToolForDrops(tool, state)) {
                         if (player.isCreative()) {
-                            level.destroyBlock(blockPos, false);
+                            level.destroyBlock(targetPos, false);
                         } else {
-                            level.destroyBlock(blockPos, true, player);
-                            // Correction ici :
-                            tool.hurtAndBreak(1, miner, (entity) -> {
-                                entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-                            });
+                            level.destroyBlock(targetPos, true, player);
+                            tool.hurtAndBreak(1, miner, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND));
                         }
                     }
-                });
+                }
+            }
+        }
     }
 }

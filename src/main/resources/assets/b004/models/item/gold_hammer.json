@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
-    "textures": {
-        "layer0": "b004:item/gold_hammer"
-    }
+  "textures": {
+    "layer0": "b004:item/golden_hammer"
+  }
 }

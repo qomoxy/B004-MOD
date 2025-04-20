@@ -23,8 +23,6 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.DIAMOND_HAMMER.get());
                         pOutput.accept(ModItems.NETHERITE_HAMMER.get());
 
-                        pOutput.accept(Items.DIAMOND);
-
 
                     })
                     .build());

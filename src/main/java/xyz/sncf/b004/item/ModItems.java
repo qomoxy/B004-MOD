@@ -1,4 +1,4 @@
-package xyz.sncf.b004.items;
+package xyz.sncf.b004.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;

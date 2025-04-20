@@ -18,6 +18,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+import xyz.sncf.b004.effects.ModEffects;
 import xyz.sncf.b004.item.ModCreativeTabs;
 import xyz.sncf.b004.item.ModItems;
 
@@ -36,6 +37,7 @@ public class B004 {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModCreativeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModEffects.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);

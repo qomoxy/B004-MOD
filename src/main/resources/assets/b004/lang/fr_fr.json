@@ -4,5 +4,11 @@
   "item.b004.diamond_hammer": "Marteau en Diamant",
   "item.b004.netherite_hammer": "Marteau en Netherite",
 
+  "item.b004.heal_wand": "Baguette de Soin",
+
+  "item.b004.magic_mushroom": "Champignon Magique",
+
+    "item.b004.wizard_book": "Livre de Sorcier",
+
   "creativetab.b004_tab": "B00 4 TAB"
 }

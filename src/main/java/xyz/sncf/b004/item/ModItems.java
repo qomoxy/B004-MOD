@@ -24,6 +24,12 @@ public class ModItems {
     public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.register("netherite_hammer",
             () -> new HammerItem(Tiers.NETHERITE, 9, -3.0F, new Item.Properties().durability(2031).fireResistant()));
 
+    public static final RegistryObject<Item> HEAL_WAND = ITEMS.register("heal_wand",
+            () -> new HealWandItem(Tiers.IRON, new Item.Properties().durability(100), 5, 5));
+
+    public static final RegistryObject<Item> MAGIC_MUSHROOM = ITEMS.register("magic_mushroom",
+            () -> new MagicMushroomItem(4, 0.3f, 30));
+
     public static final RegistryObject<Item> WIZARD_BOOK = ITEMS.register("wizard_book",
             () -> new WizardBookItem(new Item.Properties().stacksTo(1)));
 

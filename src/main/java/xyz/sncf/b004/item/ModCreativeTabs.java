@@ -23,8 +23,8 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.DIAMOND_HAMMER.get());
                         pOutput.accept(ModItems.NETHERITE_HAMMER.get());
                         pOutput.accept(ModItems.WIZARD_BOOK.get());
-
-
+                        pOutput.accept(ModItems.HEAL_WAND.get());
+                        pOutput.accept(ModItems.MAGIC_MUSHROOM.get());
                     })
                     .build());
 

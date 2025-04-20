@@ -1,5 +1,6 @@
 package xyz.sncf.b004.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -19,6 +20,10 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import org.jetbrains.annotations.NotNull;
 import xyz.sncf.b004.entity.CustomBat;
+import xyz.sncf.b004.entity.CustomFireball;
+import xyz.sncf.b004.goal.DefendPlayerGoal;
+import xyz.sncf.b004.goal.FollowPlayerGoal;
+import xyz.sncf.b004.goal.HealPlayerGoal;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -64,6 +69,8 @@ public class WizardBookItem extends Item {
 
         for (int i = 0; i < 3; i++) {
             Zombie zombie = new Zombie(level);
+            zombie.setCustomName(Component.literal("Zombie maudit"));
+            zombie.setCustomNameVisible(true);
             zombie.setPos(player.getX(), player.getY(), player.getZ());
             level.addFreshEntity(zombie);
         }
@@ -72,42 +79,41 @@ public class WizardBookItem extends Item {
     // Effet 2 : Boule de feu
     private void shootFireball(Player player) {
         Vec3 lookAngle = player.getLookAngle();
-        SmallFireball fireball = new SmallFireball(
-                player.level(), // Use player.level instead of getLevel()
-                player,
-                lookAngle.x,
-                lookAngle.y,
-                lookAngle.z
-        );
+        CustomFireball fireball = new CustomFireball(
+                player.level(), player, lookAngle.x, lookAngle.y, lookAngle.z);
         fireball.setPos(player.getX(), player.getEyeY(), player.getZ());
-        player.level().addFreshEntity(fireball); // Use player.level instead of getLevel()
+        player.level().addFreshEntity(fireball);
     }
 
-    // Effet 3 : Golem de fer boosté
     private void spawnGolem(Level level, Player player) {
-        IronGolem golem = new IronGolem(EntityType.IRON_GOLEM, level); // Utilisation de EntityType
+        IronGolem golem = new IronGolem(EntityType.IRON_GOLEM, level);
         golem.setPos(player.getX(), player.getY(), player.getZ());
-        golem.addEffect(new MobEffectInstance(
-                MobEffects.DAMAGE_BOOST, 1200, 2));
+        golem.setCustomName(Component.literal("Golem protecteur"));
+        golem.setCustomNameVisible(true);
+        golem.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 2));
+
+        // Add custom goals
+        golem.goalSelector.addGoal(1, new FollowPlayerGoal(golem, player, 1.0D, 5.0F, 2.0F));
+
         level.addFreshEntity(golem);
     }
 
     // Effet 4 : Chevalier
     private void knightEffect(Player player) {
         player.addEffect(new MobEffectInstance(
-                MobEffects.DAMAGE_BOOST, 600, 1));
+                MobEffects.DAMAGE_BOOST, 45, 1));
         player.addEffect(new MobEffectInstance(
-                MobEffects.DAMAGE_RESISTANCE, 600, 1));
+                MobEffects.DAMAGE_RESISTANCE, 45, 1));
     }
 
     // Effet 5 : Vitesse + Saut + Nourriture
     private void speedEffect(Player player) {
         player.addEffect(new MobEffectInstance(
-                MobEffects.MOVEMENT_SPEED, 400, 2));
+                MobEffects.MOVEMENT_SPEED, 40, 2));
         player.addEffect(new MobEffectInstance(
-                MobEffects.JUMP, 400, 1));
+                MobEffects.JUMP, 40, 1));
         player.addEffect(new MobEffectInstance(
-                MobEffects.INVISIBILITY, 400, 1));
+                MobEffects.INVISIBILITY, 40, 1));
         player.getFoodData().eat(20, 1.0F);
     }
 
@@ -118,6 +124,9 @@ public class WizardBookItem extends Item {
         bat.setPos(player.getX(), player.getY() + 1.0D, player.getZ());
         bat.setXRot(player.getXRot());
         bat.setYRot(player.getYRot());
+
+        bat.setCustomName(Component.literal("Chauve-souris magique"));
+        bat.setCustomNameVisible(true);
 
         // Rend la chauve-souris invulnérable et visible
         bat.setInvulnerable(true);

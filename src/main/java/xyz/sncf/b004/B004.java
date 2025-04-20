@@ -1,6 +1,7 @@
 package xyz.sncf.b004;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -17,6 +18,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+import xyz.sncf.b004.item.ModCreativeTabs;
+import xyz.sncf.b004.item.ModItems;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(B004.MODID)
@@ -30,8 +33,9 @@ public class B004 {
 
 
     public B004() {
-        @SuppressWarnings("removal") IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModCreativeTabs.register(modEventBus);
+        ModItems.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -46,6 +50,12 @@ public class B004 {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.DIAMOND_HAMMER);
+            event.accept(ModItems.NETHERITE_HAMMER);
+            event.accept(ModItems.GOLDEN_HAMMER);
+            event.accept(ModItems.IRON_HAMMER);
+        }
 
     }
 

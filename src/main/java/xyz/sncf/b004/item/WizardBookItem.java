@@ -3,9 +3,7 @@ package xyz.sncf.b004.item;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ambient.Bat;
 
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Zombie;
@@ -17,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.projectile.SmallFireball;
 import org.jetbrains.annotations.NotNull;
 import xyz.sncf.b004.entity.CustomBat;
 import xyz.sncf.b004.entity.CustomFireball;
@@ -26,7 +23,6 @@ import xyz.sncf.b004.goal.FollowPlayerGoal;
 import xyz.sncf.b004.goal.HealPlayerGoal;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class WizardBookItem extends Item {
     private static final int COOLDOWN_TICKS = 20 * 15; // 15 secondes
@@ -36,7 +32,7 @@ public class WizardBookItem extends Item {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (!level.isClientSide && stack.getDamageValue() < stack.getMaxDamage()) {
@@ -107,11 +103,16 @@ public class WizardBookItem extends Item {
 
         golem.targetSelector.addGoal(1, new DefendPlayerGoal(golem, player));
         golem.goalSelector.addGoal(2, new HealPlayerGoal(golem, player));
-
-        // Add custom goals
         golem.goalSelector.addGoal(1, new FollowPlayerGoal(golem, player, 1.0D, 5.0F, 2.0F));
 
         level.addFreshEntity(golem);
+
+        // Schedule the golem's death after 75 seconds (1500 ticks)
+        Objects.requireNonNull(level.getServer()).execute(() -> {
+            if (golem.isAlive()) {
+                golem.kill();
+            }
+        });
     }
 
     // Effet 4 : Chevalier

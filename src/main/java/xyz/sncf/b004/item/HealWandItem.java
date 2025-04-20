@@ -12,8 +12,8 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class HealWandItem extends TieredItem {
 
@@ -28,7 +28,7 @@ public class HealWandItem extends TieredItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
 
@@ -66,9 +66,7 @@ public class HealWandItem extends TieredItem {
             }
 
             // Réduire la durabilité de l'item
-            itemStack.hurtAndBreak(1, pPlayer, (entity) -> {
-                entity.broadcastBreakEvent(pUsedHand);
-            });
+            itemStack.hurtAndBreak(1, pPlayer, (entity) -> entity.broadcastBreakEvent(pUsedHand));
 
             // Appliquer le cooldown
             pPlayer.getCooldowns().addCooldown(this, (int) (cooldown * 20)); // Cooldown en ticks (20 ticks = 1 seconde)

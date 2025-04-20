@@ -16,5 +16,9 @@ public class CustomFireball extends SmallFireball {
     protected void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
         result.getEntity().hurt(damageSources().fireball(this, this.getOwner()), 10.0F); // Dégâts amplifiés
+
+        if (!this.level().isClientSide) {
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 4.0F, Level.ExplosionInteraction.TNT); // Force 4.0
+        }
     }
 }

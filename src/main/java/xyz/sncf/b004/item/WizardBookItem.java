@@ -67,11 +67,24 @@ public class WizardBookItem extends Item {
         player.addEffect(new MobEffectInstance(
                 MobEffects.BLINDNESS, 200, 1));
 
-        for (int i = 0; i < 3; i++) {
+        int zombieCount = level.random.nextInt(8) + 3; // Random number between 3 and 10
+
+        for (int i = 0; i < zombieCount; i++) {
             Zombie zombie = new Zombie(level);
             zombie.setCustomName(Component.literal("Zombie maudit"));
             zombie.setCustomNameVisible(true);
-            zombie.setPos(player.getX(), player.getY(), player.getZ());
+            zombie.setPos(player.getX() + level.random.nextDouble() * 4 - 2,
+                    player.getY(),
+                    player.getZ() + level.random.nextDouble() * 4 - 2);
+
+            // Apply random effects to the zombie
+            int effectType = level.random.nextInt(3); // Random effect type
+            switch (effectType) {
+                case 0 -> zombie.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 1)); // Speed
+                case 1 -> zombie.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 1)); // Strength
+                case 2 -> zombie.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 1)); // Resistance
+            }
+
             level.addFreshEntity(zombie);
         }
     }
@@ -92,6 +105,9 @@ public class WizardBookItem extends Item {
         golem.setCustomNameVisible(true);
         golem.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 2));
 
+        golem.targetSelector.addGoal(1, new DefendPlayerGoal(golem, player));
+        golem.goalSelector.addGoal(2, new HealPlayerGoal(golem, player));
+
         // Add custom goals
         golem.goalSelector.addGoal(1, new FollowPlayerGoal(golem, player, 1.0D, 5.0F, 2.0F));
 
@@ -101,19 +117,19 @@ public class WizardBookItem extends Item {
     // Effet 4 : Chevalier
     private void knightEffect(Player player) {
         player.addEffect(new MobEffectInstance(
-                MobEffects.DAMAGE_BOOST, 45, 1));
+                MobEffects.DAMAGE_BOOST, 600, 1));
         player.addEffect(new MobEffectInstance(
-                MobEffects.DAMAGE_RESISTANCE, 45, 1));
+                MobEffects.DAMAGE_RESISTANCE, 600, 1));
     }
 
     // Effet 5 : Vitesse + Saut + Nourriture
     private void speedEffect(Player player) {
         player.addEffect(new MobEffectInstance(
-                MobEffects.MOVEMENT_SPEED, 40, 2));
+                MobEffects.MOVEMENT_SPEED, 400, 2));
         player.addEffect(new MobEffectInstance(
-                MobEffects.JUMP, 40, 1));
+                MobEffects.JUMP, 400, 1));
         player.addEffect(new MobEffectInstance(
-                MobEffects.INVISIBILITY, 40, 1));
+                MobEffects.INVISIBILITY, 400, 1));
         player.getFoodData().eat(20, 1.0F);
     }
 

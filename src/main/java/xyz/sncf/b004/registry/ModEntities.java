@@ -2,6 +2,7 @@ package xyz.sncf.b004.registry;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -44,7 +45,7 @@ public class ModEntities {
                             .build("smoke_arrow"));
 
 
-    public static void register() {
-        ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+    public static void register(IEventBus modEventBus) {
+        ENTITIES.register(modEventBus);
     }
 }

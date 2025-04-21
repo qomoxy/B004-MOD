@@ -1,5 +1,7 @@
 package xyz.sncf.b004.registry;
 
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -49,6 +51,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> SMOKE_ARROW =
             ITEMS.register("smoke_arrow", () -> new SmokeArrowItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> SMOKE_BLOCK_ITEM = ITEMS.register("smoke_block",
+            () -> new BlockItem(ModBlocks.SMOKE_BLOCK.get(), new Item.Properties()));
 
 
 

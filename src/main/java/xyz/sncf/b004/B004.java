@@ -27,12 +27,14 @@ public class B004 {
 
     public B004() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         ModCreativeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModEffects.register(modEventBus);
         ModParticleTypes.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModEntities.register();
+        ModEntities.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         modEventBus.register(xyz.sncf.b004.client.ClientModEvents.class);
 

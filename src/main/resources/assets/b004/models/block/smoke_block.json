@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "b004:block/smoke_block"
+  },
+  "render_type": "translucent"
+}

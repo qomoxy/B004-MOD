@@ -18,7 +18,8 @@ import xyz.sncf.b004.client.ClientSetup;
 import xyz.sncf.b004.effects.ModEffects;
 import xyz.sncf.b004.init.ModParticleTypes;
 import xyz.sncf.b004.item.ModCreativeTabs;
-import xyz.sncf.b004.item.ModItems;
+import xyz.sncf.b004.registry.ModItems;
+import xyz.sncf.b004.registry.ModEntities;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(B004.MODID)
@@ -36,6 +37,7 @@ public class B004 {
         ModCreativeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModEffects.register(modEventBus);
+        ModEntities.register();
         modEventBus.addListener(this::commonSetup);
         modEventBus.register(ClientSetup.class);
         ModParticleTypes.PARTICLES.register(modEventBus);

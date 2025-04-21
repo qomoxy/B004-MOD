@@ -25,6 +25,10 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.HEAL_WAND.get());
                         pOutput.accept(ModItems.MAGIC_MUSHROOM.get());
                         pOutput.accept(ModItems.TELEPORT_CRYSTAL.get());
+                        pOutput.accept(ModItems.MAGIC_BOW.get());
+                        pOutput.accept(ModItems.ENDER_PEARL_ARROW.get());
+                        pOutput.accept(ModItems.EXPLOSIVE_ARROW.get());
+                        pOutput.accept(ModItems.SMOKE_ARROW.get());
                     })
                     .build());
 

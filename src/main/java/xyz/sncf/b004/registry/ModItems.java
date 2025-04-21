@@ -1,4 +1,4 @@
-package xyz.sncf.b004.item;
+package xyz.sncf.b004.registry;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.sncf.b004.B004;
+import xyz.sncf.b004.item.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, B004.MODID);
@@ -35,6 +36,21 @@ public class ModItems {
 
     public static final RegistryObject<Item> TELEPORT_CRYSTAL = ITEMS.register("teleport_crystal",
             () -> new TeleportCrystalItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> MAGIC_BOW = ITEMS.register("magic_bow",
+            () -> new MagicBowItem(new Item.Properties().durability(500)));
+
+    public static final RegistryObject<Item> ENDER_PEARL_ARROW =
+            ITEMS.register("ender_pearl_arrow", () ->
+                    new EnderPearlArrowItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> EXPLOSIVE_ARROW =
+            ITEMS.register("explosive_arrow", () -> new ExplosiveArrowItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> SMOKE_ARROW =
+            ITEMS.register("smoke_arrow", () -> new SmokeArrowItem(new Item.Properties()));
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

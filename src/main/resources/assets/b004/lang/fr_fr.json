@@ -3,13 +3,11 @@
   "item.b004.gold_hammer": "Marteau en Or",
   "item.b004.diamond_hammer": "Marteau en Diamant",
   "item.b004.netherite_hammer": "Marteau en Netherite",
-
   "item.b004.heal_wand": "Baguette de Soin",
-
   "item.b004.magic_mushroom": "Champignon Magique",
-
   "item.b004.wizard_book": "Livre de Sorcier",
-
+  "item.b004.ender_pearl_arrow": "flèche de l'Ender Pearl",
+  "item.b004.magic_bow": "L'arc Magique",
   "creativetab.b004_tab": "B00 4 TAB",
 
   "effect.b004.magic_mushroom_effect": "↻Champignon Magique↻"

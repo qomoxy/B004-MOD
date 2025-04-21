@@ -14,7 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import xyz.sncf.b004.client.ClientEvents;
-import xyz.sncf.b004.client.ClientSetup;
+import xyz.sncf.b004.client.ClientModEvents;
 import xyz.sncf.b004.effects.ModEffects;
 import xyz.sncf.b004.init.ModParticleTypes;
 import xyz.sncf.b004.item.ModCreativeTabs;
@@ -39,14 +39,12 @@ public class B004 {
         ModEffects.register(modEventBus);
         ModEntities.register();
         modEventBus.addListener(this::commonSetup);
-        modEventBus.register(ClientSetup.class);
+        modEventBus.register(xyz.sncf.b004.client.ClientModEvents.class);
         ModParticleTypes.PARTICLES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ClientEvents());
         modEventBus.addListener(this::addCreative);
-
-
 
     }
 
@@ -69,15 +67,5 @@ public class B004 {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
-    }
-
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-
-        }
     }
 }

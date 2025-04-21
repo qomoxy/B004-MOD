@@ -1,6 +1,5 @@
 package xyz.sncf.b004.effects;
 
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -10,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
-import xyz.sncf.b004.init.ModParticleTypes;
+import xyz.sncf.b004.registry.ModParticleTypes;
 
 import java.util.UUID;
 

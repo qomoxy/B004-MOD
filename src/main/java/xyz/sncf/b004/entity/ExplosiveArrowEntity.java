@@ -20,7 +20,7 @@ public class ExplosiveArrowEntity extends AbstractArrow {
     @Override
     protected void onHit(HitResult result) {
         if (!this.level().isClientSide) {
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 2.5F, Level.ExplosionInteraction.TNT);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.5F, Level.ExplosionInteraction.TNT);
             this.discard();
         }
     }

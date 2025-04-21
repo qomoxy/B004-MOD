@@ -23,6 +23,8 @@ public class MagicBowItem extends BowItem {
     public void releaseUsing(ItemStack stack, Level level, LivingEntity shooter, int timeLeft) {
         if (!(shooter instanceof Player player)) return;
 
+
+
         ItemStack arrowStack = player.getProjectile(stack);
 
         // Vérifie si le projectile est une flèche spéciale

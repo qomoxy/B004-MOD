@@ -10,7 +10,7 @@ import xyz.sncf.b004.client.particle.MagicMushroomParticle;
 import xyz.sncf.b004.client.renderer.EnderPearlArrowRenderer;
 import xyz.sncf.b004.client.renderer.ExplosiveArrowRenderer;
 import xyz.sncf.b004.client.renderer.SmokeArrowRenderer;
-import xyz.sncf.b004.init.ModParticleTypes;
+import xyz.sncf.b004.registry.ModParticleTypes;
 import xyz.sncf.b004.registry.ModEntities;
 
 @Mod.EventBusSubscriber(modid = B004.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)

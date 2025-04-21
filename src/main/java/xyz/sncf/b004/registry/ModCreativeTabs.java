@@ -30,6 +30,7 @@ public class ModCreativeTabs {
                         pOutput.accept(ModItems.EXPLOSIVE_ARROW.get());
                         pOutput.accept(ModItems.SMOKE_ARROW.get());
                         pOutput.accept(ModItems.SMOKE_BLOCK_ITEM.get());
+                        pOutput.accept(ModItems.ASSASSIN_CAPE.get());
                     })
                     .build());
 

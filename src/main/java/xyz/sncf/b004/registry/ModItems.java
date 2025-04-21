@@ -1,8 +1,8 @@
 package xyz.sncf.b004.registry;
 
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.sncf.b004.B004;
 import xyz.sncf.b004.item.*;
+import xyz.sncf.b004.util.ModArmorMaterials;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, B004.MODID);
@@ -55,7 +56,13 @@ public class ModItems {
     public static final RegistryObject<Item> SMOKE_BLOCK_ITEM = ITEMS.register("smoke_block",
             () -> new BlockItem(ModBlocks.SMOKE_BLOCK.get(), new Item.Properties()));
 
-
+    public static final RegistryObject<Item> ASSASSIN_CAPE = ITEMS.register("assassin_cape",
+            () -> new AssassinCapeItem(
+                    ModArmorMaterials.ASSASSIN,
+                    new Item.Properties()
+                            .durability(99999999)
+                            .rarity(Rarity.EPIC)
+            ));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -1,6 +1,6 @@
 {
   "item.b004.iron_hammer": "Iron Hammer",
-  "item.b004.gold_hammer": "Golden Hammer",
+  "item.b004.golden_hammer": "Golden Hammer",
   "item.b004.diamond_hammer": "Diamond Hammer",
   "item.b004.netherite_hammer": "Netherite Hammer",
 
@@ -9,12 +9,15 @@
   "item.b004.magic_mushroom": "The Magic Mushroom",
 
   "item.b004.wizard_book": "Wizard Book",
-
+  "item.b004.teleport_crystal": "Teleport Crystal",
   "effect.b004.magic_mushroom_effect": "↻Magic Mushroom↻",
   "item.b004.ender_pearl_arrow": "Ender Pearl Arrow",
   "item.b004.magic_bow": "Magic Bow",
   "item.b004.smoke_arrow": "Smoke Arrow",
   "item.b004.explosive_arrow": "Explosive Arrow",
+  "item.b004.assassin_cape": "Assassin Cape",
+
+  "block.b004.smoke_block": "Smoke Block",
 
   "creativetab.b004_tab": "B004 TAB"
 }

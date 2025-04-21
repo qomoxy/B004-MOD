@@ -12,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import xyz.sncf.b004.client.ClientEvents;
+import xyz.sncf.b004.events.PlayerInvisibilityHandler;
 import xyz.sncf.b004.registry.*;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -34,6 +35,7 @@ public class B004 {
         ModParticleTypes.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+        PlayerInvisibilityHandler.register();
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.register(xyz.sncf.b004.client.ClientModEvents.class);

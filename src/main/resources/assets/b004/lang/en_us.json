@@ -10,9 +10,11 @@
 
   "item.b004.wizard_book": "Wizard Book",
 
-  "effect.b004.magic_mushroom_effect": "↻Magic Mushroom↻"
+  "effect.b004.magic_mushroom_effect": "↻Magic Mushroom↻",
   "item.b004.ender_pearl_arrow": "Ender Pearl Arrow",
   "item.b004.magic_bow": "Magic Bow",
+  "item.b004.smoke_arrow": "Smoke Arrow",
+  "item.b004.explosive_arrow": "Explosive Arrow",
 
-"creativetab.b004_tab": "B004 TAB"
+  "creativetab.b004_tab": "B004 TAB"
 }

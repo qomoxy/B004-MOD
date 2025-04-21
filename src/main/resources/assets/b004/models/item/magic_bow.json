@@ -1,5 +1,5 @@
 {
-  "parent": "item/generated",
+  "parent": "item/bow",
     "textures": {
         "layer0": "b004:item/magic_bow"
     }

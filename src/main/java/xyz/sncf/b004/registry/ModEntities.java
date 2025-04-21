@@ -1,5 +1,6 @@
 package xyz.sncf.b004.registry;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,6 +13,7 @@ import xyz.sncf.b004.B004;
 import xyz.sncf.b004.entity.EnderPearlArrowEntity;
 import xyz.sncf.b004.entity.ExplosiveArrowEntity;
 import xyz.sncf.b004.entity.SmokeArrowEntity;
+import xyz.sncf.b004.entity.SmokeGrenadeEntity;
 
 @Mod.EventBusSubscriber(modid = B004.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
@@ -43,6 +45,14 @@ public class ModEntities {
                                     SmokeArrowEntity::new, MobCategory.MISC)
                             .sized(0.5F, 0.5F)
                             .build("smoke_arrow"));
+
+    public static final RegistryObject<EntityType<SmokeGrenadeEntity>> SMOKE_GRENADE =
+            ENTITIES.register("smoke_grenade",
+                    () -> EntityType.Builder.<SmokeGrenadeEntity>of(SmokeGrenadeEntity::new, MobCategory.MISC)
+                            .sized(0.25f, 0.25f)
+                            .clientTrackingRange(4)
+                            .updateInterval(10)
+                            .build("smoke_grenade"));
 
 
     public static void register(IEventBus modEventBus) {

@@ -64,6 +64,9 @@ public class ModItems {
                             .rarity(Rarity.EPIC)
             ));
 
+    public static final RegistryObject<Item> SMOKE_GRENADE = ITEMS.register("smoke_grenade",
+            () -> new SmokeGrenadeItem(new Item.Properties().stacksTo(16)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

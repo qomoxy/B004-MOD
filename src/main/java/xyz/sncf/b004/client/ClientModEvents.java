@@ -1,5 +1,6 @@
 package xyz.sncf.b004.client;
 
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -26,5 +27,6 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.ENDER_PEARL_ARROW.get(), EnderPearlArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.EXPLOSIVE_ARROW.get(), ExplosiveArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.SMOKE_ARROW.get(), SmokeArrowRenderer::new);
+        event.registerEntityRenderer(ModEntities.SMOKE_GRENADE.get(), ThrownItemRenderer::new);
     }
 }

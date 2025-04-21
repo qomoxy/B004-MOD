@@ -31,7 +31,7 @@ public class SmokeArrowEntity extends AbstractArrow {
             ((SmokeArrowItem) ModItems.SMOKE_ARROW.get()).onHit(this.level(), result, shooter);
         }
 
-        smokeBomb = new SmokeBomb(result.getLocation(), 10, 10, new Vec3(1,0.5F,1),
+        smokeBomb = new SmokeBomb(result.getLocation(), 10, 6, new Vec3(1,0.5F,1),
                 () -> MinecraftForge.EVENT_BUS.unregister(smokeBomb));
         MinecraftForge.EVENT_BUS.register(smokeBomb);
         this.discard();

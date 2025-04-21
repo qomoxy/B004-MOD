@@ -16,7 +16,7 @@ public class MagicBowItem extends BowItem {
     private static final int COOLDOWN_TICKS = 40;
 
     public MagicBowItem(Properties properties) {
-        super(properties.durability(512));
+        super(properties);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class MagicBowItem extends BowItem {
             System.out.println(">>> Special arrow DETECTED: " + specialArrow.getClass().getSimpleName());
             // Crée une flèche personnalisée
             AbstractArrow arrow = specialArrow.createArrow(level, arrowStack, shooter);
-            arrow.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 3.0F, 1.0F);
+            arrow.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 6.0F, 0);
 
             // Ajoute l'entité flèche dans le monde
             level.addFreshEntity(arrow);

@@ -12,7 +12,7 @@ public class ModEffects {
             DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "b004");
 
     public static final RegistryObject<MobEffect> MAGICMUSHROOM_EFFECT =
-            EFFECTS.register("magicmushroom_effect", MagicMushroomEffect::new);
+            EFFECTS.register("magic_mushroom_effect", MagicMushroomEffect::new);
 
     public static void register(IEventBus bus) {
         EFFECTS.register(bus);

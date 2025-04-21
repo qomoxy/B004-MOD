@@ -6,23 +6,23 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class HealWandItem extends TieredItem {
+public class HealWandItem extends Item {
 
     private static final int MAX_RADIUS = 10;
     private final float cooldown;
     private final float healAmount;
 
-    public HealWandItem(Tier pTier, Properties pProperties, float cooldown, float healAmount) {
-        super(pTier, pProperties);
+    public HealWandItem(Properties pProperties, float cooldown, float healAmount) {
+        super(pProperties);
         this.cooldown = cooldown;
         this.healAmount = healAmount;
     }

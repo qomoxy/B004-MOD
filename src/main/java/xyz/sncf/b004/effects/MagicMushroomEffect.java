@@ -1,5 +1,7 @@
 package xyz.sncf.b004.effects;
 
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -7,17 +9,34 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.Level;
+import xyz.sncf.b004.init.ModParticleTypes;
 
 import java.util.UUID;
 
 public class MagicMushroomEffect extends MobEffect {
     int duration;
+
+    private static final float TICKS_PER_SEC = 1F;
+
+    private static final float BONUS_HEAL_PER_SEC = 3F;
+    private static final float BONUS_SPEED_MULTIPLIER = 0.5F;
+    private static final float BONUS_DAMAGE_MULTIPLIER = 0.5F;
+
+    private static final float MALUS_POISON_PER_SEC = -2F;
+    private static final float MALUS_SPEED_MULTIPLIER = -0.5F;
+    private static final float MALUS_DAMAGE_MULTIPLIER = -0.25F;
     public MagicMushroomEffect() {
         super(MobEffectCategory.NEUTRAL, 0x55AAFF);
     }
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         int remaining = entity.getEffect(this).getDuration();
+
+        ApplyParticles(entity);
+
+        if(remaining % (int)(20 / TICKS_PER_SEC) != 0) return;
+
         duration = Math.max(duration, remaining);
 
         boolean isPositive = remaining > duration/2;
@@ -25,20 +44,25 @@ public class MagicMushroomEffect extends MobEffect {
 
         float mult = (float) Math.abs(remaining - duration / 2) / duration * 2;
 
+        float health;
         float bonusDamage;
         float bonusSpeed;
         if (isPositive) {
             // Phase positive : soigne, donne force et vitesse
-            entity.heal(0.5F * mult);
-            bonusDamage = 0.5F * mult;
-            bonusSpeed = 0.5F * mult;
+            health = BONUS_HEAL_PER_SEC * mult / TICKS_PER_SEC;
+            bonusDamage = BONUS_DAMAGE_MULTIPLIER * mult;
+            bonusSpeed = BONUS_SPEED_MULTIPLIER * mult;
         } else {
             // Phase négative : inflige dégâts, lenteur et faiblesse
-            entity.hurt(entity.damageSources().magic(), mult);
-            bonusDamage = -0.25F * mult;
-            bonusSpeed = -0.5F * mult;
+            health = MALUS_POISON_PER_SEC * mult / TICKS_PER_SEC;
+            bonusDamage = MALUS_DAMAGE_MULTIPLIER * mult;
+            bonusSpeed = MALUS_SPEED_MULTIPLIER * mult;
         }
 
+        ApplyEfects(entity, bonusDamage, bonusSpeed, health);
+    }
+
+    private void ApplyEfects(LivingEntity entity, float bonusDamage, float bonusSpeed, float health) {
         AttributeInstance attackDamage = entity.getAttribute(Attributes.ATTACK_DAMAGE);
         AttributeInstance speed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
         attackDamage.removeModifier(DAMAGE_MODIFIER_UUID);
@@ -46,18 +70,47 @@ public class MagicMushroomEffect extends MobEffect {
 
         AttributeModifier strengthModifier = new AttributeModifier(
                 DAMAGE_MODIFIER_UUID, "Strength Modifier",
-                bonusDamage, AttributeModifier.Operation.ADDITION);
+                bonusDamage, AttributeModifier.Operation.MULTIPLY_TOTAL);
         attackDamage.addTransientModifier(strengthModifier);
 
         AttributeModifier dynamicModifier = new AttributeModifier(
                 SPEED_MODIFIER_UUID, "Speed Modifier",
                 bonusSpeed, AttributeModifier.Operation.MULTIPLY_TOTAL);
         speed.addTransientModifier(dynamicModifier);
+
+        // On applique le soin ou les dégâts
+        if (health > 0) {
+            entity.heal(health);
+        } else {
+            entity.hurt(entity.damageSources().magic(), -health);
+        }
+    }
+
+    private void ApplyParticles(LivingEntity entity) {
+
+        Level world = entity.level();
+
+        if (!world.isClientSide) return;
+
+        double x = entity.getX();
+        double y = entity.getY() + entity.getEyeHeight();
+        double z = entity.getZ();
+
+        RandomSource random = entity.getRandom();
+        double dirX = (random.nextDouble() - 0.5) * 0.1;
+        double dirY = 0.02F;
+        double dirZ = (random.nextDouble() - 0.5) * 0.1;
+
+        world.addParticle(
+                ModParticleTypes.MAGIC_MUSHROOM_PARTICLE.get(),
+                x, y, z,
+                dirX, dirY, dirZ
+        );
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return duration % 10 == 0;
+        return true;
     }
 
     @Override

@@ -14,7 +14,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import xyz.sncf.b004.client.ClientEvents;
+import xyz.sncf.b004.client.ClientSetup;
 import xyz.sncf.b004.effects.ModEffects;
+import xyz.sncf.b004.init.ModParticleTypes;
 import xyz.sncf.b004.item.ModCreativeTabs;
 import xyz.sncf.b004.item.ModItems;
 
@@ -35,6 +37,8 @@ public class B004 {
         ModItems.register(modEventBus);
         ModEffects.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
+        modEventBus.register(ClientSetup.class);
+        ModParticleTypes.PARTICLES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ClientEvents());

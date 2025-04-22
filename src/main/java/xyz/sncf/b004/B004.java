@@ -35,6 +35,7 @@ public class B004 {
         ModParticleTypes.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModModelLayers.register();
         PlayerInvisibilityHandler.register();
 
         modEventBus.addListener(this::commonSetup);

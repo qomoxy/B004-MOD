@@ -1,0 +1,35 @@
+{
+    "texture_size": [64, 64],
+    "textures": {
+        "0": "b004:textures/entity/summoner_boss",
+        "particle": "b004:textures/entity/summoner_boss"
+    },
+    "elements": [
+        {
+            "name": "body",
+            "from": [-4, 0, -2],
+            "to": [4, 12, 2],
+            "faces": {
+                "north": {"uv": [0, 0, 8, 12], "texture": "#0"},
+                "east": {"uv": [8, 0, 12, 12], "texture": "#0"},
+                "south": {"uv": [16, 0, 24, 12], "texture": "#0"},
+                "west": {"uv": [24, 0, 28, 12], "texture": "#0"},
+                "up": {"uv": [32, 0, 40, 4], "texture": "#0"},
+                "down": {"uv": [40, 0, 48, 4], "texture": "#0"}
+            }
+        },
+        {
+            "name": "head",
+            "from": [-4, -8, -4],
+            "to": [4, 0, 4],
+            "faces": {
+                "north": {"uv": [0, 16, 8, 24], "texture": "#0"},
+                "east": {"uv": [8, 16, 16, 24], "texture": "#0"},
+                "south": {"uv": [16, 16, 24, 24], "texture": "#0"},
+                "west": {"uv": [24, 16, 32, 24], "texture": "#0"},
+                "up": {"uv": [32, 16, 40, 24], "texture": "#0"},
+                "down": {"uv": [40, 16, 48, 24], "texture": "#0"}
+            }
+        }
+    ]
+}

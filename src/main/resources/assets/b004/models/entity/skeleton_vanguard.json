@@ -1,0 +1,35 @@
+{
+  "texture_size": [64, 32],
+  "textures": {
+    "0": "b004:textures/entity/skeleton_vanguard",
+    "particle": "b004:textures/entity/skeleton_vanguard"
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [-4, 0, -2],
+      "to": [4, 12, 2],
+      "faces": {
+        "north": {"uv": [16, 16, 24, 28], "texture": "#0"},
+        "east": {"uv": [0, 16, 8, 28], "texture": "#0"},
+        "south": {"uv": [16, 16, 24, 28], "texture": "#0"},
+        "west": {"uv": [0, 16, 8, 28], "texture": "#0"},
+        "up": {"uv": [8, 0, 16, 8], "texture": "#0"},
+        "down": {"uv": [16, 0, 24, 8], "texture": "#0"}
+      }
+    },
+    {
+      "name": "head",
+      "from": [-4, -8, -4],
+      "to": [4, 0, 4],
+      "faces": {
+        "north": {"uv": [0, 0, 8, 8], "texture": "#0"},
+        "east": {"uv": [8, 0, 16, 8], "texture": "#0"},
+        "south": {"uv": [16, 0, 24, 8], "texture": "#0"},
+        "west": {"uv": [24, 0, 32, 8], "texture": "#0"},
+        "up": {"uv": [8, 8, 16, 16], "texture": "#0"},
+        "down": {"uv": [16, 8, 24, 16], "texture": "#0"}
+      }
+    }
+  ]
+}
